@@ -366,18 +366,8 @@
     <h2 data-i18n="journal_title">Mon quotidien</h2>
     <p data-i18n="journal_sub">Ce que je construis, apprends et vis — au jour le jour.</p>
   </div>
-  <div class="journal">
-    <div class="entry">
-      <time data-i18n="e1_date">Juillet 2026</time>
-      <h3 data-i18n="e1_title">Lancement de mon site vitrine</h3>
-      <p data-i18n="e1_desc">Nouveau départ : un espace à moi pour partager mon travail et mon parcours.</p>
-    </div>
-    <div class="entry">
-      <time data-i18n="e2_date">Août 2026</time>
-      <h3 data-i18n="e2_title">Le site est en ligne</h3>
-      <p data-i18n="e2_desc">Premier déploiement sur GitHub Pages : le site est désormais accessible à tous, avec mon parcours et mon CV en téléchargement.</p>
-    </div>
-  </div>
+  <!-- les entrées sont générées depuis la liste JOURNAL, en bas de page -->
+  <div class="journal" id="journalList"></div>
 </section>
 
 <section id="contact" class="reveal">
@@ -422,8 +412,6 @@ const I18N = {
     cv4_when:"2021 – 2023",cv4_what:"Master Informatique et Systèmes d'information — Ynov Campus",
     cv_btn:"Télécharger mon CV (PDF)",cv_meta:"PDF · 1 page · 135 Ko",
     journal_title:"Mon quotidien",journal_sub:"Ce que je construis, apprends et vis — au jour le jour.",
-    e1_date:"Juillet 2026",e1_title:"Lancement de mon site vitrine",e1_desc:"Nouveau départ : un espace à moi pour partager mon travail et mon parcours.",
-    e2_date:"Août 2026",e2_title:"Le site est en ligne",e2_desc:"Premier déploiement sur GitHub Pages : le site est désormais accessible à tous, avec mon parcours et mon CV en téléchargement.",
     contact_title:"Travaillons ensemble",contact_sub:"Un projet, une idée, ou juste envie d'échanger ? Ma boîte mail est ouverte.",
     footer:"© 2026 Mohamed — Conçu avec passion.",
     typed:["Je construis des choses avec du code.","Je partage mon parcours au quotidien.","Je transforme les idées en projets."]
@@ -451,13 +439,43 @@ const I18N = {
     cv4_when:"2021 – 2023",cv4_what:"Master's in Computer Science & Information Systems — Ynov Campus",
     cv_btn:"Download my resume (PDF)",cv_meta:"PDF · 1 page · 135 KB",
     journal_title:"My daily life",journal_sub:"What I build, learn and live — day by day.",
-    e1_date:"July 2026",e1_title:"Launching my personal site",e1_desc:"A fresh start: my own space to share my work and my journey.",
-    e2_date:"August 2026",e2_title:"The site is live",e2_desc:"First deployment on GitHub Pages: the site is now open to everyone, with my background and my resume available for download.",
     contact_title:"Let's work together",contact_sub:"A project, an idea, or just want to chat? My inbox is open.",
     footer:"© 2026 Mohamed — Built with passion.",
     typed:["I build things with code.","I share my journey every day.","I turn ideas into projects."]
   }
 };
+/* ---------------- journal ----------------
+   Une seule liste pour les deux langues : pour ajouter une entrée,
+   copie un bloc ci-dessous et complète fr et en. L'ordre du tableau
+   est celui de l'affichage (de la plus ancienne à la plus récente). */
+const JOURNAL = [
+  {
+    fr:{date:"Juillet 2026", title:"Lancement de mon site vitrine",
+        desc:"Nouveau départ : un espace à moi pour partager mon travail et mon parcours."},
+    en:{date:"July 2026", title:"Launching my personal site",
+        desc:"A fresh start: my own space to share my work and my journey."}
+  },
+  {
+    fr:{date:"Août 2026", title:"Le site est en ligne",
+        desc:"Premier déploiement sur GitHub Pages : le site est désormais accessible à tous, avec mon parcours et mon CV en téléchargement."},
+    en:{date:"August 2026", title:"The site is live",
+        desc:"First deployment on GitHub Pages: the site is now open to everyone, with my background and my resume available for download."}
+  }
+];
+function renderJournal(l){
+  const list = document.getElementById('journalList');
+  list.textContent = '';
+  JOURNAL.forEach(item=>{
+    const e = item[l] || item.fr;
+    const entry = document.createElement('div');
+    entry.className = 'entry';
+    const time = document.createElement('time'); time.textContent = e.date;
+    const h3 = document.createElement('h3');     h3.textContent = e.title;
+    const p = document.createElement('p');       p.textContent = e.desc;
+    entry.append(time, h3, p);
+    list.appendChild(entry);
+  });
+}
 let lang = localStorage.getItem('lang') || 'fr';
 function setLang(l){
   lang = l;
@@ -469,6 +487,7 @@ function setLang(l){
   });
   document.getElementById('btnFr').classList.toggle('active', l==='fr');
   document.getElementById('btnEn').classList.toggle('active', l==='en');
+  renderJournal(l);
   restartTyping();
 }
 /* ---------------- machine à écrire ---------------- */
