@@ -3,8 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mohamed — Portfolio</title>
-<meta name="description" content="Mohamed — Développeur. Mon travail, mes réalisations, mon quotidien.">
+<title>Mohamed Doumbouya — Développeur .NET</title>
+<meta name="description" content="Développeur .NET à Casablanca. Applications métiers, APIs ASP.NET Core, intégrations Dynamics CRM, automatisation des flux et déploiements conteneurisés.">
+<link rel="canonical" href="https://medoum.github.io/">
+<!-- aperçu au partage (LinkedIn, Slack, messageries) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://medoum.github.io/">
+<meta property="og:title" content="Mohamed Doumbouya — Développeur .NET">
+<meta property="og:description" content="Applications métiers, APIs ASP.NET Core, intégrations Dynamics CRM et fiabilisation des déploiements. Basé à Casablanca.">
+<meta property="og:image" content="https://medoum.github.io/portrait.png">
+<meta property="og:image:alt" content="Portrait de Mohamed Doumbouya">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mohamed Doumbouya — Développeur .NET">
+<meta name="twitter:description" content="Applications métiers, APIs ASP.NET Core, intégrations Dynamics CRM et fiabilisation des déploiements.">
+<meta name="twitter:image" content="https://medoum.github.io/portrait.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a0a0f'/><text x='50' y='72' font-family='system-ui,sans-serif' font-size='62' font-weight='800' text-anchor='middle' fill='%23d4af6a'>M</text></svg>">
 <style>
   :root{
     --bg:#0a0a0f;
@@ -140,11 +155,18 @@
   .stat:hover{border-color:rgba(212,175,106,.4);transform:translateY(-4px)}
   .stat b{display:block;font-size:2rem;color:var(--gold2)}
   .stat span{font-size:.82rem;color:var(--muted)}
-  .skills{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2rem}
+  .skills{display:flex;flex-direction:column;gap:1.1rem;margin-top:2rem}
+  .skill-group{display:flex;flex-direction:column;gap:.5rem}
+  .skill-label{
+    font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+  }
+  .chips{display:flex;flex-wrap:wrap;gap:.5rem}
   .chip{
     padding:.4rem 1rem;border-radius:99px;font-size:.82rem;
     background:rgba(139,124,246,.08);border:1px solid rgba(139,124,246,.25);color:#c4bcf9;
   }
+  /* technos en cours d'apprentissage : volontairement plus discrètes */
+  .chip-soft{background:transparent;border-style:dashed;border-color:var(--border);color:var(--muted)}
   /* projets */
   .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
   .project{
@@ -255,7 +277,7 @@
 <header>
   <div class="hero-inner">
     <div class="hero-text">
-      <span class="kicker" data-i18n="hero_kicker">Développeur · Créateur · Curieux</span>
+      <span class="kicker" data-i18n="hero_kicker">Développeur .NET · Dynamics CRM · Intégration SI</span>
       <h1><span data-i18n="hero_hi">Salut, moi c'est</span> <em>Mohamed</em>.</h1>
       <div class="typed-line"><span id="typed"></span><span class="cursor"></span></div>
       <div class="cta-row">
@@ -287,18 +309,44 @@
   </div>
   <div class="about-grid">
     <div class="about-text">
-      <p data-i18n="about_p1">Je suis Mohamed, développeur passionné par la tech et tout ce qui se construit avec du code. Ce site est mon espace : j'y partage mon travail, mes projets, mais aussi mon quotidien et ce que j'apprends en chemin.</p>
-      <p data-i18n="about_p2">Ce qui me motive : transformer des idées en produits concrets, apprendre en continu, et documenter le parcours — les réussites comme les galères.</p>
+      <p data-i18n="about_p1">Je suis Mohamed Doumbouya, développeur .NET à Casablanca. Je fais vivre et évoluer des applications métiers critiques : APIs ASP.NET Core, intégrations Dynamics CRM et automatisation de flux au sein de systèmes d'information d'entreprise.</p>
+      <p data-i18n="about_p2">Ce qui me guide : des architectures qui restent lisibles dans deux ans, des mises en production qui ne réveillent personne la nuit — pipelines CI/CD et conteneurs — et un dialogue direct avec les équipes métier pour transformer un besoin flou en fonctionnalité qui tient la charge.</p>
       <div class="skills">
-        <span class="chip">C# / .NET</span><span class="chip">Angular</span><span class="chip">Java / Spring</span>
-        <span class="chip">SQL Server</span><span class="chip">JavaScript</span><span class="chip">Docker</span>
-        <span class="chip">Kubernetes</span><span class="chip">Terraform</span><span class="chip">Ansible</span><span class="chip">Git</span>
+        <div class="skill-group">
+          <span class="skill-label" data-i18n="sk_core">Cœur de métier</span>
+          <div class="chips">
+            <span class="chip">C#</span><span class="chip">.NET Framework &amp; Core</span>
+            <span class="chip">ASP.NET Core / Web API</span><span class="chip">Dynamics CRM</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <span class="skill-label" data-i18n="sk_data">Données</span>
+          <div class="chips"><span class="chip">SQL Server</span><span class="chip">T-SQL &amp; optimisation</span></div>
+        </div>
+        <div class="skill-group">
+          <span class="skill-label" data-i18n="sk_ops">Livraison</span>
+          <div class="chips">
+            <span class="chip">Docker</span><span class="chip">GitLab CI/CD</span>
+            <span class="chip">Azure DevOps</span><span class="chip">Git</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <span class="skill-label" data-i18n="sk_front">Front</span>
+          <div class="chips"><span class="chip">Angular</span></div>
+        </div>
+        <div class="skill-group">
+          <span class="skill-label" data-i18n="sk_learning">En cours</span>
+          <div class="chips">
+            <span class="chip chip-soft">C++</span><span class="chip chip-soft">Clean Architecture</span>
+            <span class="chip chip-soft">Kubernetes</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="stats">
       <div class="stat"><b data-count="12">0</b><span data-i18n="stat1">Projets réalisés</span></div>
       <div class="stat"><b data-count="4">0</b><span data-i18n="stat2">Années de pratique</span></div>
-      <div class="stat"><b data-count="10">0</b><span data-i18n="stat3">Technos maîtrisées</span></div>
+      <div class="stat"><b data-count="11">0</b><span data-i18n="stat3">Technos maîtrisées</span></div>
       <div class="stat"><b>∞</b><span data-i18n="stat4">Curiosité</span></div>
     </div>
   </div>
@@ -332,7 +380,7 @@
   <div class="sec-head">
     <span class="num">03</span>
     <h2 data-i18n="cv_title">Mon parcours</h2>
-    <p data-i18n="cv_sub">Développeur .NET à Casablanca — quatre ans d'expérience sur des applications métiers.</p>
+    <p data-i18n="cv_sub">Quatre ans sur des applications métiers critiques, du plugin Dynamics jusqu'à la mise en production.</p>
   </div>
   <div class="cv-card">
     <div class="cv-timeline">
@@ -392,21 +440,22 @@
 const I18N = {
   fr:{
     nav_about:"À propos",nav_work:"Réalisations",nav_cv:"CV",nav_journal:"Quotidien",nav_contact:"Contact",
-    hero_kicker:"Développeur · Créateur · Curieux",
+    hero_kicker:"Développeur .NET · Dynamics CRM · Intégration SI",
     hero_hi:"Salut, moi c'est",
+    sk_core:"Cœur de métier",sk_data:"Données",sk_ops:"Livraison",sk_front:"Front",sk_learning:"En cours",
     hero_cta1:"Voir mes réalisations",hero_cta2:"Me contacter",
     photo_hint:"Ta photo ici — ajoute photo.jpg ou photo.png dans le dossier",
     status:"Disponible pour de nouveaux projets",
     about_title:"À propos de moi",
-    about_p1:"Je suis Mohamed, développeur passionné par la tech et tout ce qui se construit avec du code. Ce site est mon espace : j'y partage mon travail, mes projets, mais aussi mon quotidien et ce que j'apprends en chemin.",
-    about_p2:"Ce qui me motive : transformer des idées en produits concrets, apprendre en continu, et documenter le parcours — les réussites comme les galères.",
+    about_p1:"Je suis Mohamed Doumbouya, développeur .NET à Casablanca. Je fais vivre et évoluer des applications métiers critiques : APIs ASP.NET Core, intégrations Dynamics CRM et automatisation de flux au sein de systèmes d'information d'entreprise.",
+    about_p2:"Ce qui me guide : des architectures qui restent lisibles dans deux ans, des mises en production qui ne réveillent personne la nuit — pipelines CI/CD et conteneurs — et un dialogue direct avec les équipes métier pour transformer un besoin flou en fonctionnalité qui tient la charge.",
     stat1:"Projets réalisés",stat2:"Années de pratique",stat3:"Technos maîtrisées",stat4:"Curiosité",
     work_title:"Réalisations",work_sub:"Une sélection de projets dont je suis fier. Chaque projet raconte une histoire.",
     p1_desc:"Une application web interactive construite avec Blazor : du C# côté navigateur plutôt que du JavaScript. Mon terrain d'apprentissage de l'écosystème .NET moderne.",
     p1_link:"Voir le code →",
     p2_title:"Plus sur GitHub",p2_desc:"Structures de données en Java, projet Spring, expérimentations Python… le reste de mon travail est sur mon profil GitHub.",
     p2_link:"Voir mon profil →",
-    cv_title:"Mon parcours",cv_sub:"Développeur .NET à Casablanca — quatre ans d'expérience sur des applications métiers.",
+    cv_title:"Mon parcours",cv_sub:"Quatre ans sur des applications métiers critiques, du plugin Dynamics jusqu'à la mise en production.",
     cv1_when:"Depuis mars 2026",cv1_what:"Développeur .NET — Reborn",
     cv2_when:"2024 – 2026",cv2_what:"Développeur .NET, applications métiers & SI — Nexpublica",
     cv3_when:"2023 – 2024",cv3_what:"Stages .NET / Angular — INETUM, Yulcom, Exakis Nelite",
@@ -415,25 +464,26 @@ const I18N = {
     journal_title:"Mon quotidien",journal_sub:"Ce que je construis, apprends et vis — au jour le jour.",
     contact_title:"Travaillons ensemble",contact_sub:"Un projet, une idée, ou juste envie d'échanger ? Ma boîte mail est ouverte.",
     footer:"© 2026 Mohamed — Conçu avec passion.",
-    typed:["Je construis des choses avec du code.","Je partage mon parcours au quotidien.","Je transforme les idées en projets."]
+    typed:["Je construis des applications métiers en .NET.","J'intègre Dynamics CRM aux systèmes d'information.","Je fiabilise les mises en production."]
   },
   en:{
     nav_about:"About",nav_work:"Work",nav_cv:"Resume",nav_journal:"Daily life",nav_contact:"Contact",
-    hero_kicker:"Developer · Builder · Curious",
+    hero_kicker:".NET Developer · Dynamics CRM · Systems Integration",
     hero_hi:"Hi, I'm",
+    sk_core:"Core stack",sk_data:"Data",sk_ops:"Delivery",sk_front:"Front-end",sk_learning:"Learning",
     hero_cta1:"See my work",hero_cta2:"Get in touch",
     photo_hint:"Your photo here — add photo.jpg or photo.png to the folder",
     status:"Available for new projects",
     about_title:"About me",
-    about_p1:"I'm Mohamed, a developer passionate about tech and everything that can be built with code. This site is my space: I share my work, my projects, but also my daily life and what I learn along the way.",
-    about_p2:"What drives me: turning ideas into real products, learning constantly, and documenting the journey — the wins and the struggles.",
+    about_p1:"I'm Mohamed Doumbouya, a .NET developer based in Casablanca. I maintain and evolve business-critical applications: ASP.NET Core APIs, Dynamics CRM integrations and process automation inside enterprise information systems.",
+    about_p2:"What guides me: architectures that are still readable two years later, releases that don't wake anyone up at night — CI/CD pipelines and containers — and a direct line to business teams, turning a vague need into a feature that holds up in production.",
     stat1:"Projects built",stat2:"Years of practice",stat3:"Technologies",stat4:"Curiosity",
     work_title:"Work",work_sub:"A selection of projects I'm proud of. Every project tells a story.",
     p1_desc:"An interactive web app built with Blazor: C# running in the browser instead of JavaScript. My playground for learning the modern .NET ecosystem.",
     p1_link:"View the code →",
     p2_title:"More on GitHub",p2_desc:"Java data structures, a Spring project, Python experiments… the rest of my work lives on my GitHub profile.",
     p2_link:"View my profile →",
-    cv_title:"My background",cv_sub:".NET developer in Casablanca — four years building business applications.",
+    cv_title:"My background",cv_sub:"Four years on business-critical applications, from Dynamics plugins through to production.",
     cv1_when:"Since March 2026",cv1_what:".NET Developer — Reborn",
     cv2_when:"2024 – 2026",cv2_what:".NET Developer, business apps & IS — Nexpublica",
     cv3_when:"2023 – 2024",cv3_what:".NET / Angular internships — INETUM, Yulcom, Exakis Nelite",
@@ -442,7 +492,7 @@ const I18N = {
     journal_title:"My daily life",journal_sub:"What I build, learn and live — day by day.",
     contact_title:"Let's work together",contact_sub:"A project, an idea, or just want to chat? My inbox is open.",
     footer:"© 2026 Mohamed — Built with passion.",
-    typed:["I build things with code.","I share my journey every day.","I turn ideas into projects."]
+    typed:["I build business applications with .NET.","I integrate Dynamics CRM with enterprise systems.","I make releases reliable."]
   }
 };
 /* ---------------- journal ----------------
