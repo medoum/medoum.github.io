@@ -57,7 +57,7 @@
     background:rgba(10,10,15,.75);backdrop-filter:blur(14px);
     border-bottom:1px solid var(--border);
   }
-  .logo{font-weight:800;font-size:1.2rem;letter-spacing:.05em;text-decoration:none;color:var(--text)}
+  .logo{font-weight:800;font-size:1.2rem;letter-spacing:.05em;text-decoration:none;color:var(--text);white-space:nowrap}
   .logo span{color:var(--gold)}
   .nav-links{display:flex;gap:1.8rem;align-items:center;list-style:none}
   .nav-links a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .25s}
@@ -86,6 +86,7 @@
   h1{font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.1;font-weight:800;margin-bottom:1rem}
   h1 em{font-style:normal;background:linear-gradient(120deg,var(--gold),var(--gold2),var(--violet));
     -webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-lead{font-size:1.05rem;color:#c9c6d0;max-width:33em;margin-bottom:.8rem}
   .typed-line{font-size:1.15rem;color:var(--muted);min-height:2em;margin-bottom:2rem}
   .typed-line .cursor{display:inline-block;width:2px;height:1.1em;background:var(--gold);
     vertical-align:text-bottom;animation:blink 1s steps(1) infinite}
@@ -138,6 +139,40 @@
   }
   .status-badge .dot{width:8px;height:8px;border-radius:50%;background:#4ade80;
     box-shadow:0 0 8px #4ade80;animation:blink 2s infinite}
+  /* ---------- bandeau défilant ---------- */
+  .marquee{
+    overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+    background:rgba(255,255,255,.015);padding:.9rem 0;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+  }
+  .marquee-track{display:flex;gap:3rem;width:max-content;animation:slide 32s linear infinite}
+  .marquee-track span{
+    font-size:.82rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);white-space:nowrap;
+  }
+  .marquee-track span::after{content:"·";margin-left:3rem;color:var(--gold);opacity:.5}
+  /* la piste contient deux copies : -50% ramène exactement au point de départ */
+  @keyframes slide{to{transform:translateX(-50%)}}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+  @media(prefers-reduced-motion:reduce){.marquee-track{animation:none}}
+  /* ---------- expertise ---------- */
+  /* 2×2 : quatre cartes se lisent mieux en carré qu'en 3+1 */
+  .expertise{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+  @media(max-width:768px){.expertise{grid-template-columns:1fr}}
+  .exp-card{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.8rem;transition:.35s;position:relative;overflow:hidden;
+  }
+  .exp-card::before{
+    content:"";position:absolute;inset:0;border-radius:var(--radius);pointer-events:none;
+    background:radial-gradient(circle at 50% 0%,rgba(212,175,106,.10),transparent 60%);
+    opacity:0;transition:.35s;
+  }
+  .exp-card:hover{transform:translateY(-6px);border-color:rgba(212,175,106,.35)}
+  .exp-card:hover::before{opacity:1}
+  .exp-icon{font-size:1.6rem;margin-bottom:.8rem}
+  .exp-card h3{font-size:1.05rem;margin-bottom:.5rem}
+  .exp-card p{color:var(--muted);font-size:.92rem}
   /* ---------- sections ---------- */
   section{padding:6rem 5vw;max-width:1200px;margin:0 auto}
   .sec-head{margin-bottom:3rem}
@@ -246,6 +281,8 @@
     }
     .nav-links.open{display:flex}
     .burger{display:block}
+    /* le nom complet doit tenir sur une ligne à côté du sélecteur de langue */
+    .logo{font-size:.88rem;letter-spacing:0}
     .hero-inner{flex-direction:column-reverse;text-align:center}
     .cta-row{justify-content:center}
     .about-grid{grid-template-columns:1fr}
@@ -257,9 +294,10 @@
 <div class="bg-glow"></div>
 
 <nav>
-  <a href="#" class="logo">M<span>.</span></a>
+  <a href="#" class="logo">Mohamed Doumbouya<span>.</span></a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#about" data-i18n="nav_about">À propos</a></li>
+    <li><a href="#expertise" data-i18n="nav_expertise">Expertise</a></li>
     <li><a href="#work" data-i18n="nav_work">Réalisations</a></li>
     <li><a href="#cv" data-i18n="nav_cv">CV</a></li>
     <li><a href="#journal" data-i18n="nav_journal">Quotidien</a></li>
@@ -278,11 +316,12 @@
   <div class="hero-inner">
     <div class="hero-text">
       <span class="kicker" data-i18n="hero_kicker">Développeur .NET · Dynamics CRM · Intégration SI</span>
-      <h1><span data-i18n="hero_hi">Salut, moi c'est</span> <em>Mohamed</em>.</h1>
+      <h1 data-i18n-html="hero_h1">Des applications métiers <em>qui tiennent en production</em>.</h1>
+      <p class="hero-lead" data-i18n="hero_lead">J'aide les entreprises à faire évoluer leurs applications .NET critiques — APIs, intégrations CRM et flux de données — sans casser ce qui tourne déjà.</p>
       <div class="typed-line"><span id="typed"></span><span class="cursor"></span></div>
       <div class="cta-row">
         <a href="#work" class="btn btn-gold" data-i18n="hero_cta1">Voir mes réalisations</a>
-        <a href="#contact" class="btn btn-ghost" data-i18n="hero_cta2">Me contacter</a>
+        <a href="CV-Mohamed-Doumbouya.pdf" class="btn btn-ghost" download data-i18n="hero_cta2">Télécharger mon CV ↓</a>
       </div>
     </div>
     <div class="hero-photo">
@@ -302,9 +341,51 @@
   </div>
 </header>
 
-<section id="about" class="reveal">
+<!-- bandeau défilant : dupliqué une fois pour un défilement sans couture -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>C#</span><span>.NET Core</span><span>ASP.NET Web API</span><span>Dynamics CRM</span>
+    <span>FetchXML</span><span>SQL Server</span><span>Docker</span><span>GitLab CI/CD</span>
+    <span>Azure DevOps</span><span>Angular</span>
+    <span>C#</span><span>.NET Core</span><span>ASP.NET Web API</span><span>Dynamics CRM</span>
+    <span>FetchXML</span><span>SQL Server</span><span>Docker</span><span>GitLab CI/CD</span>
+    <span>Azure DevOps</span><span>Angular</span>
+  </div>
+</div>
+
+<section id="expertise" class="reveal">
   <div class="sec-head">
     <span class="num">01</span>
+    <h2 data-i18n="exp_title">Ce que je fais</h2>
+    <p data-i18n="exp_sub">Quatre domaines sur lesquels j'interviens au quotidien, du besoin métier jusqu'à la production.</p>
+  </div>
+  <div class="expertise">
+    <article class="exp-card">
+      <div class="exp-icon">⚙️</div>
+      <h3 data-i18n="exp1_title">Applications métiers .NET</h3>
+      <p data-i18n="exp1_desc">Maintenance corrective et évolutive d'applications critiques en C# / .NET, Framework comme Core. Correction d'incidents, nouvelles fonctionnalités, continuité de service pour les utilisateurs finaux.</p>
+    </article>
+    <article class="exp-card">
+      <div class="exp-icon">🔗</div>
+      <h3 data-i18n="exp2_title">Intégration Dynamics CRM &amp; SI</h3>
+      <p data-i18n="exp2_desc">Plugins, workflows et requêtes FetchXML sur Dynamics. Connexion des applications Microsoft aux systèmes existants via APIs, et refonte des processus qui les relient.</p>
+    </article>
+    <article class="exp-card">
+      <div class="exp-icon">🔄</div>
+      <h3 data-i18n="exp3_title">Automatisation des flux</h3>
+      <p data-i18n="exp3_desc">Traitements et échanges de données automatisés pour gagner en fiabilité et en performance, avec la documentation technique qui permet à l'équipe de reprendre la main.</p>
+    </article>
+    <article class="exp-card">
+      <div class="exp-icon">🚀</div>
+      <h3 data-i18n="exp4_title">Fiabilisation des déploiements</h3>
+      <p data-i18n="exp4_desc">Pipelines CI/CD sur GitLab et Azure DevOps, conteneurisation Docker : des mises en production répétables, tracées et sans surprise.</p>
+    </article>
+  </div>
+</section>
+
+<section id="about" class="reveal">
+  <div class="sec-head">
+    <span class="num">02</span>
     <h2 data-i18n="about_title">À propos de moi</h2>
   </div>
   <div class="about-grid">
@@ -354,7 +435,7 @@
 
 <section id="work" class="reveal">
   <div class="sec-head">
-    <span class="num">02</span>
+    <span class="num">03</span>
     <h2 data-i18n="work_title">Réalisations</h2>
     <p data-i18n="work_sub">Une sélection de projets dont je suis fier. Chaque projet raconte une histoire.</p>
   </div>
@@ -378,7 +459,7 @@
 
 <section id="cv" class="reveal">
   <div class="sec-head">
-    <span class="num">03</span>
+    <span class="num">04</span>
     <h2 data-i18n="cv_title">Mon parcours</h2>
     <p data-i18n="cv_sub">Quatre ans sur des applications métiers critiques, du plugin Dynamics jusqu'à la mise en production.</p>
   </div>
@@ -410,7 +491,7 @@
 
 <section id="journal" class="reveal">
   <div class="sec-head">
-    <span class="num">04</span>
+    <span class="num">05</span>
     <h2 data-i18n="journal_title">Mon quotidien</h2>
     <p data-i18n="journal_sub">Ce que je construis, apprends et vis — au jour le jour.</p>
   </div>
@@ -439,11 +520,17 @@
 /* ---------------- i18n ---------------- */
 const I18N = {
   fr:{
-    nav_about:"À propos",nav_work:"Réalisations",nav_cv:"CV",nav_journal:"Quotidien",nav_contact:"Contact",
+    nav_about:"À propos",nav_expertise:"Expertise",nav_work:"Réalisations",nav_cv:"CV",nav_journal:"Quotidien",nav_contact:"Contact",
+    hero_h1:"Des applications métiers <em>qui tiennent en production</em>.",
+    hero_lead:"J'aide les entreprises à faire évoluer leurs applications .NET critiques — APIs, intégrations CRM et flux de données — sans casser ce qui tourne déjà.",
+    exp_title:"Ce que je fais",exp_sub:"Quatre domaines sur lesquels j'interviens au quotidien, du besoin métier jusqu'à la production.",
+    exp1_title:"Applications métiers .NET",exp1_desc:"Maintenance corrective et évolutive d'applications critiques en C# / .NET, Framework comme Core. Correction d'incidents, nouvelles fonctionnalités, continuité de service pour les utilisateurs finaux.",
+    exp2_title:"Intégration Dynamics CRM & SI",exp2_desc:"Plugins, workflows et requêtes FetchXML sur Dynamics. Connexion des applications Microsoft aux systèmes existants via APIs, et refonte des processus qui les relient.",
+    exp3_title:"Automatisation des flux",exp3_desc:"Traitements et échanges de données automatisés pour gagner en fiabilité et en performance, avec la documentation technique qui permet à l'équipe de reprendre la main.",
+    exp4_title:"Fiabilisation des déploiements",exp4_desc:"Pipelines CI/CD sur GitLab et Azure DevOps, conteneurisation Docker : des mises en production répétables, tracées et sans surprise.",
     hero_kicker:"Développeur .NET · Dynamics CRM · Intégration SI",
-    hero_hi:"Salut, moi c'est",
     sk_core:"Cœur de métier",sk_data:"Données",sk_ops:"Livraison",sk_front:"Front",sk_learning:"En cours",
-    hero_cta1:"Voir mes réalisations",hero_cta2:"Me contacter",
+    hero_cta1:"Voir mes réalisations",hero_cta2:"Télécharger mon CV ↓",
     photo_hint:"Ta photo ici — ajoute photo.jpg ou photo.png dans le dossier",
     status:"Disponible pour de nouveaux projets",
     about_title:"À propos de moi",
@@ -467,11 +554,17 @@ const I18N = {
     typed:["Je construis des applications métiers en .NET.","J'intègre Dynamics CRM aux systèmes d'information.","Je fiabilise les mises en production."]
   },
   en:{
-    nav_about:"About",nav_work:"Work",nav_cv:"Resume",nav_journal:"Daily life",nav_contact:"Contact",
+    nav_about:"About",nav_expertise:"Expertise",nav_work:"Work",nav_cv:"Resume",nav_journal:"Daily life",nav_contact:"Contact",
+    hero_h1:"Business applications <em>that hold up in production</em>.",
+    hero_lead:"I help companies evolve their business-critical .NET applications — APIs, CRM integrations and data flows — without breaking what already runs.",
+    exp_title:"What I do",exp_sub:"Four areas I work in day to day, from the business need through to production.",
+    exp1_title:".NET business applications",exp1_desc:"Corrective and evolutionary maintenance of business-critical C# / .NET applications, Framework and Core alike. Incident fixing, new features, continuity of service for end users.",
+    exp2_title:"Dynamics CRM & systems integration",exp2_desc:"Plugins, workflows and FetchXML queries on Dynamics. Connecting Microsoft applications to existing systems through APIs, and reshaping the processes that link them.",
+    exp3_title:"Process automation",exp3_desc:"Automated data processing and exchanges for better reliability and performance, with the technical documentation that lets the team take over.",
+    exp4_title:"Reliable deployments",exp4_desc:"CI/CD pipelines on GitLab and Azure DevOps, Docker containerisation: releases that are repeatable, traceable and free of surprises.",
     hero_kicker:".NET Developer · Dynamics CRM · Systems Integration",
-    hero_hi:"Hi, I'm",
     sk_core:"Core stack",sk_data:"Data",sk_ops:"Delivery",sk_front:"Front-end",sk_learning:"Learning",
-    hero_cta1:"See my work",hero_cta2:"Get in touch",
+    hero_cta1:"See my work",hero_cta2:"Download my resume ↓",
     photo_hint:"Your photo here — add photo.jpg or photo.png to the folder",
     status:"Available for new projects",
     about_title:"About me",
@@ -541,6 +634,11 @@ function setLang(l){
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const k = el.getAttribute('data-i18n');
     if(I18N[l][k]) el.textContent = I18N[l][k];
+  });
+  /* titres contenant une mise en valeur <em> : chaînes internes, jamais de saisie utilisateur */
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+    const k = el.getAttribute('data-i18n-html');
+    if(I18N[l][k]) el.innerHTML = I18N[l][k];
   });
   document.getElementById('btnFr').classList.toggle('active', l==='fr');
   document.getElementById('btnEn').classList.toggle('active', l==='en');
