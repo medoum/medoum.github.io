@@ -222,8 +222,38 @@
   .tags{display:flex;flex-wrap:wrap;gap:.4rem}
   .tags span{font-size:.72rem;padding:.2rem .6rem;border-radius:6px;
     background:rgba(212,175,106,.08);color:var(--gold2);border:1px solid rgba(212,175,106,.2)}
-  .project-link{color:var(--gold2);text-decoration:none;font-size:.85rem;font-weight:600;transition:.25s}
+  .project-link{color:var(--gold2);text-decoration:none;font-size:.85rem;font-weight:600;transition:.25s;
+    background:none;border:none;padding:0;cursor:pointer;font-family:inherit;text-align:left}
   .project-link:hover{text-decoration:underline;color:var(--gold)}
+  /* ---------- étude de cas ---------- */
+  .case-overlay{
+    position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
+    padding:5vh 5vw;background:rgba(6,6,10,.82);backdrop-filter:blur(6px);
+  }
+  .case-overlay[hidden]{display:none}
+  .case-panel{
+    position:relative;width:min(720px,100%);max-height:90vh;overflow-y:auto;
+    background:linear-gradient(150deg,var(--card),#1a1626);
+    border:1px solid var(--border);border-radius:24px;padding:2.5rem;
+    animation:panelIn .35s cubic-bezier(.2,.8,.3,1);
+  }
+  @keyframes panelIn{from{opacity:0;transform:translateY(24px)}}
+  @media(prefers-reduced-motion:reduce){.case-panel{animation:none}}
+  .case-close{
+    position:absolute;top:1rem;right:1rem;width:36px;height:36px;border-radius:50%;
+    background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--muted);
+    cursor:pointer;font-size:.9rem;transition:.25s;
+  }
+  .case-close:hover{color:var(--gold2);border-color:var(--gold)}
+  .case-eyebrow{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  .case-panel h3{font-size:1.5rem;margin:.4rem 0 1rem;line-height:1.25}
+  .case-panel .tags{margin-bottom:1.6rem}
+  .case-body h4{
+    font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);
+    margin:1.4rem 0 .4rem;
+  }
+  .case-body p{color:#c9c6d0;font-size:.95rem}
+  @media(max-width:768px){.case-panel{padding:2rem 1.3rem}}
   /* cv */
   .cv-card{
     background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
@@ -437,25 +467,23 @@
   <div class="sec-head">
     <span class="num">03</span>
     <h2 data-i18n="work_title">Réalisations</h2>
-    <p data-i18n="work_sub">Une sélection de projets dont je suis fier. Chaque projet raconte une histoire.</p>
+    <p data-i18n="work_sub">Trois missions détaillées — contexte, enjeu, ce que j'ai fait, résultat — et mon code public.</p>
   </div>
-  <div class="projects">
-    <article class="project">
-      <div class="icon">🔷</div>
-      <h3>blazorProject</h3>
-      <p data-i18n="p1_desc">Une application web interactive construite avec Blazor : du C# côté navigateur plutôt que du JavaScript. Mon terrain d'apprentissage de l'écosystème .NET moderne.</p>
-      <div class="tags"><span>C#</span><span>Blazor</span><span>.NET</span><span>HTML/CSS</span></div>
-      <a class="project-link" href="https://github.com/medoum/blazorProject" target="_blank" rel="noopener" data-i18n="p1_link">Voir le code →</a>
-    </article>
-    <article class="project">
-      <div class="icon">📂</div>
-      <h3 data-i18n="p2_title">Plus sur GitHub</h3>
-      <p data-i18n="p2_desc">Structures de données en Java, projet Spring, expérimentations Python… le reste de mon travail est sur mon profil GitHub.</p>
-      <div class="tags"><span>Java</span><span>Spring</span><span>Python</span></div>
-      <a class="project-link" href="https://github.com/medoum" target="_blank" rel="noopener" data-i18n="p2_link">Voir mon profil →</a>
-    </article>
-  </div>
+  <!-- cartes générées depuis la liste CASES, en bas de page -->
+  <div class="projects" id="projectList"></div>
 </section>
+
+<!-- panneau d'étude de cas, rempli à l'ouverture -->
+<div class="case-overlay" id="caseOverlay" hidden>
+  <div class="case-panel" role="dialog" aria-modal="true" aria-labelledby="caseTitle">
+    <button class="case-close" id="caseClose" aria-label="Fermer">✕</button>
+    <span class="case-eyebrow" id="caseEyebrow"></span>
+    <h3 id="caseTitle"></h3>
+    <div class="tags" id="caseTags"></div>
+    <div class="case-body" id="caseBody"></div>
+    <a class="project-link" id="caseLink" target="_blank" rel="noopener" hidden></a>
+  </div>
+</div>
 
 <section id="cv" class="reveal">
   <div class="sec-head">
@@ -537,11 +565,8 @@ const I18N = {
     about_p1:"Je suis Mohamed Doumbouya, développeur .NET à Casablanca. Je fais vivre et évoluer des applications métiers critiques : APIs ASP.NET Core, intégrations Dynamics CRM et automatisation de flux au sein de systèmes d'information d'entreprise.",
     about_p2:"Ce qui me guide : des architectures qui restent lisibles dans deux ans, des mises en production qui ne réveillent personne la nuit — pipelines CI/CD et conteneurs — et un dialogue direct avec les équipes métier pour transformer un besoin flou en fonctionnalité qui tient la charge.",
     stat1:"Projets réalisés",stat2:"Années de pratique",stat3:"Technos maîtrisées",stat4:"Curiosité",
-    work_title:"Réalisations",work_sub:"Une sélection de projets dont je suis fier. Chaque projet raconte une histoire.",
-    p1_desc:"Une application web interactive construite avec Blazor : du C# côté navigateur plutôt que du JavaScript. Mon terrain d'apprentissage de l'écosystème .NET moderne.",
-    p1_link:"Voir le code →",
-    p2_title:"Plus sur GitHub",p2_desc:"Structures de données en Java, projet Spring, expérimentations Python… le reste de mon travail est sur mon profil GitHub.",
-    p2_link:"Voir mon profil →",
+    work_title:"Réalisations",work_sub:"Trois missions détaillées — contexte, enjeu, ce que j'ai fait, résultat — et mon code public.",
+    case_cta:"Lire l'étude de cas →",case_close:"Fermer",
     cv_title:"Mon parcours",cv_sub:"Quatre ans sur des applications métiers critiques, du plugin Dynamics jusqu'à la mise en production.",
     cv1_when:"Depuis mars 2026",cv1_what:"Développeur .NET — Reborn",
     cv2_when:"2024 – 2026",cv2_what:"Développeur .NET, applications métiers & SI — Nexpublica",
@@ -571,11 +596,8 @@ const I18N = {
     about_p1:"I'm Mohamed Doumbouya, a .NET developer based in Casablanca. I maintain and evolve business-critical applications: ASP.NET Core APIs, Dynamics CRM integrations and process automation inside enterprise information systems.",
     about_p2:"What guides me: architectures that are still readable two years later, releases that don't wake anyone up at night — CI/CD pipelines and containers — and a direct line to business teams, turning a vague need into a feature that holds up in production.",
     stat1:"Projects built",stat2:"Years of practice",stat3:"Technologies",stat4:"Curiosity",
-    work_title:"Work",work_sub:"A selection of projects I'm proud of. Every project tells a story.",
-    p1_desc:"An interactive web app built with Blazor: C# running in the browser instead of JavaScript. My playground for learning the modern .NET ecosystem.",
-    p1_link:"View the code →",
-    p2_title:"More on GitHub",p2_desc:"Java data structures, a Spring project, Python experiments… the rest of my work lives on my GitHub profile.",
-    p2_link:"View my profile →",
+    work_title:"Work",work_sub:"Three assignments in detail — context, challenge, what I did, outcome — plus my public code.",
+    case_cta:"Read the case study →",case_close:"Close",
     cv_title:"My background",cv_sub:"Four years on business-critical applications, from Dynamics plugins through to production.",
     cv1_when:"Since March 2026",cv1_what:".NET Developer — Reborn",
     cv2_when:"2024 – 2026",cv2_what:".NET Developer, business apps & IS — Nexpublica",
@@ -626,6 +648,149 @@ function renderJournal(l){
     list.appendChild(entry);
   });
 }
+/* ---------------- réalisations & études de cas ----------------
+   Une carte par entrée. Si l'entrée porte des "sections", la carte ouvre
+   une étude de cas ; si elle porte un "link", elle renvoie vers le code.
+   Les contenus reprennent strictement ce que documente le CV. */
+const CASES = [
+  {
+    icon:"🔗", tags:["C#",".NET","Dynamics CRM","SQL Server","APIs"],
+    fr:{eyebrow:"Nexpublica · 2024 – 2026",
+        title:"Faire évoluer un SI métier sans interrompre les opérations",
+        short:"Maintenance et évolution d'applications critiques en C# / .NET adossées à Dynamics CRM, utilisées chaque jour par les équipes métier.",
+        sections:[
+          ["Contexte","Des applications métiers critiques, développées en C# / .NET (Framework et Core) et adossées à Dynamics CRM, au cœur d'un système d'information structuré."],
+          ["Enjeu","Garantir la continuité des opérations pour les utilisateurs finaux tout en livrant de nouvelles fonctionnalités : corriger sans figer, faire évoluer sans casser l'existant."],
+          ["Ce que j'ai fait","Maintenance corrective et évolutive, correction des incidents applicatifs, développement de fonctionnalités avec les équipes fonctionnelles, intégration entre les applications Microsoft et les systèmes existants (CRM, APIs), et automatisation de traitements et de flux de données."],
+          ["Résultat","Continuité de service assurée pour les utilisateurs, flux applicatifs plus fiables et plus performants, et une documentation technique qui permet à l'équipe de reprendre la main."]]},
+    en:{eyebrow:"Nexpublica · 2024 – 2026",
+        title:"Evolving a business information system without interrupting operations",
+        short:"Maintaining and evolving business-critical C# / .NET applications backed by Dynamics CRM, used daily by business teams.",
+        sections:[
+          ["Context","Business-critical applications built in C# / .NET (Framework and Core) and backed by Dynamics CRM, at the heart of a structured information system."],
+          ["Challenge","Keeping operations running for end users while still shipping new features: fixing without freezing, evolving without breaking what already works."],
+          ["What I did","Corrective and evolutionary maintenance, incident resolution, feature development alongside business teams, integration between Microsoft applications and existing systems (CRM, APIs), and automation of data processing and flows."],
+          ["Outcome","Service continuity for users, more reliable and better-performing application flows, and technical documentation that lets the team take over."]]}
+  },
+  {
+    icon:"🚀", tags:["GitLab CI/CD","Azure DevOps","Docker"],
+    fr:{eyebrow:"Nexpublica · 2024 – 2026",
+        title:"Fiabiliser les mises en production",
+        short:"Pipelines CI/CD et conteneurisation pour des déploiements répétables plutôt que manuels.",
+        sections:[
+          ["Contexte","Des déploiements applicatifs à sécuriser dans un environnement de production sensible, où une erreur se paie immédiatement côté utilisateurs."],
+          ["Enjeu","Réduire la part manuelle des mises en production, principale source d'erreurs et de stress au moment de livrer."],
+          ["Ce que j'ai fait","Mise en place de pipelines CI/CD sur GitLab et Azure DevOps, puis dockerisation des applications pour uniformiser les environnements d'exécution."],
+          ["Résultat","Des déploiements répétables et tracés, avec la sécurisation du code intégrée au processus de livraison plutôt qu'ajoutée après coup."]]},
+    en:{eyebrow:"Nexpublica · 2024 – 2026",
+        title:"Making releases reliable",
+        short:"CI/CD pipelines and containerisation, for deployments that repeat instead of being hand-run.",
+        sections:[
+          ["Context","Application deployments to secure in a sensitive production environment, where a mistake is felt immediately by users."],
+          ["Challenge","Cutting down the manual part of releases — the main source of errors and stress at shipping time."],
+          ["What I did","Set up CI/CD pipelines on GitLab and Azure DevOps, then containerised the applications with Docker to make runtime environments consistent."],
+          ["Outcome","Repeatable, traceable deployments, with code security folded into the delivery process rather than bolted on afterwards."]]}
+  },
+  {
+    icon:"🔐", tags:["ASP.NET Core","Web API","JWT","Angular"],
+    fr:{eyebrow:"Exakis Nelite · 2023",
+        title:"APIs métier et contrôle d'accès par rôles",
+        short:"Développement d'APIs ASP.NET Core Web API, puis d'un système d'authentification et d'autorisation.",
+        sections:[
+          ["Contexte","Des APIs ASP.NET Core Web API destinées à des applications métiers, et une application client à faire évoluer en environnement Angular / .NET Core / Azure DevOps."],
+          ["Enjeu","Exposer les données métier aux applications clientes tout en contrôlant précisément qui accède à quoi."],
+          ["Ce que j'ai fait","Développement des APIs, puis mise en place d'un système d'authentification et d'autorisation reposant sur JWT, avec gestion des rôles."],
+          ["Résultat","Un accès aux ressources contrôlé par profil utilisateur, dans un contexte proche des applications d'entreprise et des systèmes d'information."]]},
+    en:{eyebrow:"Exakis Nelite · 2023",
+        title:"Business APIs and role-based access control",
+        short:"Building ASP.NET Core Web APIs, then the authentication and authorisation layer around them.",
+        sections:[
+          ["Context","ASP.NET Core Web APIs serving business applications, plus a client application to evolve in an Angular / .NET Core / Azure DevOps environment."],
+          ["Challenge","Exposing business data to client applications while keeping precise control over who can reach what."],
+          ["What I did","Developed the APIs, then implemented a JWT-based authentication and authorisation system with role management."],
+          ["Outcome","Resource access controlled per user profile, in a setting close to real enterprise applications and information systems."]]}
+  },
+  {
+    icon:"🔷", tags:["C#","Blazor",".NET"], link:"https://github.com/medoum/blazorProject",
+    fr:{eyebrow:"Projet personnel", title:"blazorProject",
+        short:"Une application web construite avec Blazor : du C# côté navigateur plutôt que du JavaScript. Mon terrain d'essai de l'écosystème .NET moderne.",
+        cta:"Voir le code →"},
+    en:{eyebrow:"Personal project", title:"blazorProject",
+        short:"A web app built with Blazor: C# running in the browser instead of JavaScript. My testing ground for the modern .NET ecosystem.",
+        cta:"View the code →"}
+  },
+  {
+    icon:"📂", tags:["GitHub","GitLab"], link:"https://github.com/medoum",
+    fr:{eyebrow:"Code public", title:"Le reste de mon code",
+        short:"Structures de données en Java, projet Spring, expérimentations Python et dépôts .NET — sur mes profils GitHub et GitLab.",
+        cta:"Voir mon profil →"},
+    en:{eyebrow:"Public code", title:"The rest of my code",
+        short:"Java data structures, a Spring project, Python experiments and .NET repositories — on my GitHub and GitLab profiles.",
+        cta:"View my profile →"}
+  }
+];
+function renderCases(l){
+  const list = document.getElementById('projectList');
+  list.textContent = '';
+  CASES.forEach((item, i)=>{
+    const c = item[l] || item.fr;
+    const card = document.createElement('article');
+    card.className = 'project';
+    const icon = document.createElement('div'); icon.className='icon'; icon.textContent=item.icon;
+    const h3 = document.createElement('h3');    h3.textContent = c.title;
+    const p = document.createElement('p');      p.textContent = c.short;
+    const tags = document.createElement('div'); tags.className='tags';
+    item.tags.forEach(t=>{const s=document.createElement('span'); s.textContent=t; tags.appendChild(s);});
+    card.append(icon, h3, p, tags);
+    if(c.sections){
+      const btn = document.createElement('button');
+      btn.className = 'project-link';
+      btn.textContent = I18N[l].case_cta;
+      btn.addEventListener('click', ()=>openCase(i));
+      card.appendChild(btn);
+    } else {
+      const a = document.createElement('a');
+      a.className='project-link'; a.href=item.link; a.target='_blank'; a.rel='noopener';
+      a.textContent = c.cta;
+      card.appendChild(a);
+    }
+    list.appendChild(card);
+  });
+}
+/* --- panneau d'étude de cas --- */
+let lastFocused = null;
+function openCase(i){
+  const item = CASES[i], c = item[lang] || item.fr;
+  document.getElementById('caseEyebrow').textContent = c.eyebrow;
+  document.getElementById('caseTitle').textContent = c.title;
+  const tags = document.getElementById('caseTags'); tags.textContent='';
+  item.tags.forEach(t=>{const s=document.createElement('span'); s.textContent=t; tags.appendChild(s);});
+  const body = document.getElementById('caseBody'); body.textContent='';
+  c.sections.forEach(([h,txt])=>{
+    const h4=document.createElement('h4'); h4.textContent=h;
+    const p=document.createElement('p');   p.textContent=txt;
+    body.append(h4,p);
+  });
+  const link = document.getElementById('caseLink');
+  if(item.link){ link.href=item.link; link.textContent=(c.cta||'→'); link.hidden=false; }
+  else { link.hidden=true; }
+  lastFocused = document.activeElement;
+  document.getElementById('caseOverlay').hidden = false;
+  document.body.style.overflow = 'hidden';
+  document.getElementById('caseClose').focus();
+}
+function closeCase(){
+  document.getElementById('caseOverlay').hidden = true;
+  document.body.style.overflow = '';
+  if(lastFocused) lastFocused.focus();
+}
+document.getElementById('caseClose').addEventListener('click', closeCase);
+document.getElementById('caseOverlay').addEventListener('click', e=>{
+  if(e.target.id === 'caseOverlay') closeCase();
+});
+document.addEventListener('keydown', e=>{
+  if(e.key === 'Escape' && !document.getElementById('caseOverlay').hidden) closeCase();
+});
 let lang = localStorage.getItem('lang') || 'fr';
 function setLang(l){
   lang = l;
@@ -643,6 +808,8 @@ function setLang(l){
   document.getElementById('btnFr').classList.toggle('active', l==='fr');
   document.getElementById('btnEn').classList.toggle('active', l==='en');
   renderJournal(l);
+  renderCases(l);
+  document.getElementById('caseClose').setAttribute('aria-label', I18N[l].case_close);
   restartTyping();
 }
 /* ---------------- machine à écrire ---------------- */
