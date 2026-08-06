@@ -42,13 +42,42 @@
   }
   ::selection{background:var(--gold);color:#000}
   /* ---------- fond animé ---------- */
-  .bg-glow{position:fixed;inset:0;z-index:-1;pointer-events:none}
+  .bg-glow{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+  /* nébuleuses : les deux voiles de couleur du fond */
   .bg-glow::before,.bg-glow::after{
     content:"";position:absolute;width:60vw;height:60vw;border-radius:50%;
-    filter:blur(120px);opacity:.13;
+    filter:blur(120px);opacity:.11;
   }
   .bg-glow::before{background:var(--gold);top:-20vw;right:-20vw}
   .bg-glow::after{background:var(--violet);bottom:-25vw;left:-20vw}
+  /* champ d'étoiles : trois plans, chacun un seul élément portant N ombres */
+  .stars i{
+    position:absolute;top:0;left:0;width:1px;height:1px;border-radius:50%;
+    background:transparent;will-change:opacity;
+  }
+  .stars .near{width:2px;height:2px;animation:twinkle 4s ease-in-out infinite}
+  .stars .mid{animation:twinkle 7s ease-in-out infinite .8s}
+  .stars .far{animation:twinkle 11s ease-in-out infinite 1.6s}
+  @keyframes twinkle{0%,100%{opacity:1}50%{opacity:.45}}
+  /* l'astre : disque éclairé en biais, halo doré, anneau incliné */
+  .astre{
+    position:absolute;top:-14vw;right:-10vw;width:44vw;height:44vw;border-radius:50%;
+    background:radial-gradient(circle at 32% 28%,#2b2438 0%,#1a1626 45%,#0f0e16 100%);
+    box-shadow:
+      inset -30px -24px 70px rgba(0,0,0,.65),
+      inset 26px 22px 90px rgba(212,175,106,.10),
+      0 0 140px rgba(212,175,106,.13);
+    animation:drift 40s ease-in-out infinite alternate;
+  }
+  .astre::after{
+    content:"";position:absolute;inset:-14%;border-radius:50%;
+    border:1px solid rgba(212,175,106,.16);
+    transform:rotate(-22deg) scaleY(.28);
+  }
+  @keyframes drift{to{transform:translate(-2.5vw,2vw)}}
+  @media(prefers-reduced-motion:reduce){
+    .stars .near,.stars .mid,.stars .far,.astre{animation:none}
+  }
   /* ---------- nav ---------- */
   nav{
     position:fixed;top:0;left:0;right:0;z-index:100;
@@ -321,7 +350,10 @@
 </style>
 </head>
 <body>
-<div class="bg-glow"></div>
+<div class="bg-glow" aria-hidden="true">
+  <div class="astre"></div>
+  <div class="stars"><i class="far"></i><i class="mid"></i><i class="near"></i></div>
+</div>
 
 <nav>
   <a href="#" class="logo">Mohamed Doumbouya<span>.</span></a>
@@ -856,6 +888,29 @@ document.querySelectorAll('[data-count]').forEach(el=>statObs.observe(el));
 /* ---------------- fermer le menu mobile au clic ---------------- */
 document.querySelectorAll('.nav-links a').forEach(a=>
   a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+/* ---------------- ciel étoilé ----------------
+   Un seul élément par plan, portant N ombres portées : le champ complet
+   ne coûte que trois nœuds au lieu de plusieurs centaines. */
+function seedStars(){
+  const w = innerWidth, h = innerHeight;
+  const plans = [
+    ['far',  Math.round(w*h/9000),  'rgba(255,255,255,.35)'],
+    ['mid',  Math.round(w*h/16000), 'rgba(255,255,255,.62)'],
+    ['near', Math.round(w*h/38000), 'rgba(240,212,154,.9)']
+  ];
+  plans.forEach(([cls,n,color])=>{
+    const el = document.querySelector('.stars .'+cls);
+    if(!el) return;
+    const dots = [];
+    for(let i=0;i<n;i++){
+      dots.push(Math.round(Math.random()*w)+'px '+Math.round(Math.random()*h)+'px 0 '+color);
+    }
+    el.style.boxShadow = dots.join(',');
+  });
+}
+seedStars();
+let skyTimer;
+addEventListener('resize', ()=>{ clearTimeout(skyTimer); skyTimer = setTimeout(seedStars, 250); });
 /* init */
 setLang(lang);
 </script>
