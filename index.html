@@ -131,10 +131,9 @@
   .btn-ghost:hover{border-color:var(--gold);color:var(--gold2)}
   /* portrait */
   .hero-photo{flex:0 0 auto;position:relative}
+  /* pas de cadre : la silhouette détourée se pose directement sur le ciel */
   .photo-frame{
-    width:min(320px,70vw);aspect-ratio:1/1;border-radius:24px;overflow:hidden;
-    border:1px solid var(--border);position:relative;
-    background:linear-gradient(160deg,#1c1c28,#101018);
+    width:min(340px,74vw);aspect-ratio:1/1;position:relative;
   }
   .photo-frame img{
     width:100%;height:100%;object-fit:cover;display:block;
@@ -142,25 +141,25 @@
     -webkit-mask-image:linear-gradient(to bottom,#000 78%,transparent 100%);
     mask-image:linear-gradient(to bottom,#000 78%,transparent 100%);
   }
+  /* le placeholder garde un fond : sans photo, il serait illisible sur les étoiles */
   .photo-frame .placeholder{
     position:absolute;inset:0;display:flex;flex-direction:column;gap:.6rem;
     align-items:center;justify-content:center;color:var(--muted);font-size:.85rem;text-align:center;padding:1rem;
+    background:linear-gradient(160deg,#1c1c28,#101018);border:1px solid var(--border);border-radius:24px;
   }
   .photo-frame .placeholder .initial{
     width:90px;height:90px;border-radius:50%;display:flex;align-items:center;justify-content:center;
     font-size:2.5rem;font-weight:800;color:var(--gold);
     background:rgba(212,175,106,.1);border:1px solid rgba(212,175,106,.3);
   }
-  .photo-frame::after{
-    content:"";position:absolute;inset:0;border-radius:24px;
-    box-shadow:inset 0 0 60px rgba(212,175,106,.06);pointer-events:none;
-  }
+  /* halo d'arrière-plan : lueur douce derrière le sujet, plus de cadre à border */
   .photo-glow{
-    position:absolute;inset:-12px;border-radius:32px;z-index:-1;
-    background:conic-gradient(from 180deg,var(--gold),var(--violet),var(--gold));
-    filter:blur(28px);opacity:.35;animation:spin 8s linear infinite;
+    position:absolute;inset:-18%;border-radius:50%;z-index:-1;
+    background:radial-gradient(circle at 50% 45%,rgba(212,175,106,.20),rgba(139,124,246,.12) 45%,transparent 70%);
+    filter:blur(30px);animation:breathe 9s ease-in-out infinite;
   }
-  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes breathe{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+  @media(prefers-reduced-motion:reduce){.photo-glow{animation:none}}
   .status-badge{
     position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);
     background:var(--card);border:1px solid var(--border);border-radius:99px;
