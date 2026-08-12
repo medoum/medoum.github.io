@@ -376,7 +376,7 @@
 <header>
   <div class="hero-inner">
     <div class="hero-text">
-      <span class="kicker" data-i18n="hero_kicker">Développeur .NET · Dynamics CRM · Intégration SI</span>
+      <span class="kicker" data-i18n="hero_kicker">Développeur .NET · Blazor · Intégration SI</span>
       <h1 data-i18n-html="hero_h1">Des applications métiers <em>qui tiennent en production</em>.</h1>
       <p class="hero-lead" data-i18n="hero_lead">J'aide les entreprises à faire évoluer leurs applications .NET critiques — APIs, intégrations CRM et flux de données — sans casser ce qui tourne déjà.</p>
       <div class="typed-line"><span id="typed"></span><span class="cursor"></span></div>
@@ -451,44 +451,48 @@
   </div>
   <div class="about-grid">
     <div class="about-text">
-      <p data-i18n="about_p1">Je suis Mohamed Doumbouya, développeur .NET à Casablanca. Je fais vivre et évoluer des applications métiers critiques : APIs ASP.NET Core, intégrations Dynamics CRM et automatisation de flux au sein de systèmes d'information d'entreprise.</p>
+      <p data-i18n="about_p1">Je suis Mohamed Doumbouya, développeur .NET full stack à Casablanca. Je construis et modernise des applications métiers critiques : dashboards temps réel en Blazor sur .NET 10, APIs ASP.NET Core, intégrations Dynamics CRM et SAP, et pipelines ETL au sein de systèmes d'information industriels.</p>
       <p data-i18n="about_p2">Ce qui me guide : des architectures qui restent lisibles dans deux ans, des mises en production qui ne réveillent personne la nuit — pipelines CI/CD et conteneurs — et un dialogue direct avec les équipes métier pour transformer un besoin flou en fonctionnalité qui tient la charge.</p>
       <div class="skills">
         <div class="skill-group">
           <span class="skill-label" data-i18n="sk_core">Cœur de métier</span>
           <div class="chips">
-            <span class="chip">C#</span><span class="chip">.NET Framework &amp; Core</span>
-            <span class="chip">ASP.NET Core / Web API</span><span class="chip">Dynamics CRM</span>
+            <span class="chip">C#</span><span class="chip">.NET 6 – 10</span>
+            <span class="chip">ASP.NET Core Web API</span><span class="chip">Blazor Server</span>
+            <span class="chip">Dynamics CRM</span>
           </div>
         </div>
         <div class="skill-group">
           <span class="skill-label" data-i18n="sk_data">Données</span>
-          <div class="chips"><span class="chip">SQL Server</span><span class="chip">T-SQL &amp; optimisation</span></div>
+          <div class="chips">
+            <span class="chip">SQL Server</span><span class="chip">T-SQL &amp; optimisation</span>
+            <span class="chip">PostgreSQL</span><span class="chip">EF Core / Dapper</span>
+          </div>
         </div>
         <div class="skill-group">
           <span class="skill-label" data-i18n="sk_ops">Livraison</span>
           <div class="chips">
-            <span class="chip">Docker</span><span class="chip">GitLab CI/CD</span>
-            <span class="chip">Azure DevOps</span><span class="chip">Git</span>
+            <span class="chip">Docker</span><span class="chip">Azure DevOps</span>
+            <span class="chip">GitLab CI/CD</span><span class="chip">Linux</span>
+            <span class="chip">xUnit / Moq</span><span class="chip">Git</span>
           </div>
         </div>
         <div class="skill-group">
           <span class="skill-label" data-i18n="sk_front">Front</span>
-          <div class="chips"><span class="chip">Angular</span></div>
+          <div class="chips"><span class="chip">Angular</span><span class="chip">TypeScript</span></div>
         </div>
         <div class="skill-group">
           <span class="skill-label" data-i18n="sk_learning">En cours</span>
           <div class="chips">
-            <span class="chip chip-soft">C++</span><span class="chip chip-soft">Clean Architecture</span>
-            <span class="chip chip-soft">Kubernetes</span>
+            <span class="chip chip-soft">C++</span><span class="chip chip-soft">Kubernetes</span>
           </div>
         </div>
       </div>
     </div>
     <div class="stats">
       <div class="stat"><b data-count="12">0</b><span data-i18n="stat1">Projets réalisés</span></div>
-      <div class="stat"><b data-count="4">0</b><span data-i18n="stat2">Années de pratique</span></div>
-      <div class="stat"><b data-count="11">0</b><span data-i18n="stat3">Technos maîtrisées</span></div>
+      <div class="stat"><b data-count="3" data-suffix="+">0</b><span data-i18n="stat2">Années d'expérience</span></div>
+      <div class="stat"><b data-count="17">0</b><span data-i18n="stat3">Technos maîtrisées</span></div>
       <div class="stat"><b>∞</b><span data-i18n="stat4">Curiosité</span></div>
     </div>
   </div>
@@ -498,7 +502,7 @@
   <div class="sec-head">
     <span class="num">03</span>
     <h2 data-i18n="work_title">Réalisations</h2>
-    <p data-i18n="work_sub">Trois missions détaillées — contexte, enjeu, ce que j'ai fait, résultat — et mon code public.</p>
+    <p data-i18n="work_sub">Quatre missions détaillées — contexte, enjeu, ce que j'ai fait, résultat — et mon code public.</p>
   </div>
   <!-- cartes générées depuis la liste CASES, en bas de page -->
   <div class="projects" id="projectList"></div>
@@ -520,7 +524,7 @@
   <div class="sec-head">
     <span class="num">04</span>
     <h2 data-i18n="cv_title">Mon parcours</h2>
-    <p data-i18n="cv_sub">Quatre ans sur des applications métiers critiques, du plugin Dynamics jusqu'à la mise en production.</p>
+    <p data-i18n="cv_sub">Plus de trois ans sur des applications métiers critiques, du dashboard temps réel à la mise en production.</p>
   </div>
   <div class="cv-card">
     <div class="cv-timeline">
@@ -587,18 +591,18 @@ const I18N = {
     exp2_title:"Intégration Dynamics CRM & SI",exp2_desc:"Plugins, workflows et requêtes FetchXML sur Dynamics. Connexion des applications Microsoft aux systèmes existants via APIs, et refonte des processus qui les relient.",
     exp3_title:"Automatisation des flux",exp3_desc:"Traitements et échanges de données automatisés pour gagner en fiabilité et en performance, avec la documentation technique qui permet à l'équipe de reprendre la main.",
     exp4_title:"Fiabilisation des déploiements",exp4_desc:"Pipelines CI/CD sur GitLab et Azure DevOps, conteneurisation Docker : des mises en production répétables, tracées et sans surprise.",
-    hero_kicker:"Développeur .NET · Dynamics CRM · Intégration SI",
+    hero_kicker:"Développeur .NET · Blazor · Intégration SI",
     sk_core:"Cœur de métier",sk_data:"Données",sk_ops:"Livraison",sk_front:"Front",sk_learning:"En cours",
     hero_cta1:"Voir mes réalisations",hero_cta2:"Télécharger mon CV ↓",
     photo_hint:"Ta photo ici — ajoute photo.jpg ou photo.png dans le dossier",
     status:"Disponible pour de nouveaux projets",
     about_title:"À propos de moi",
-    about_p1:"Je suis Mohamed Doumbouya, développeur .NET à Casablanca. Je fais vivre et évoluer des applications métiers critiques : APIs ASP.NET Core, intégrations Dynamics CRM et automatisation de flux au sein de systèmes d'information d'entreprise.",
+    about_p1:"Je suis Mohamed Doumbouya, développeur .NET full stack à Casablanca. Je construis et modernise des applications métiers critiques : dashboards temps réel en Blazor sur .NET 10, APIs ASP.NET Core, intégrations Dynamics CRM et SAP, et pipelines ETL au sein de systèmes d'information industriels.",
     about_p2:"Ce qui me guide : des architectures qui restent lisibles dans deux ans, des mises en production qui ne réveillent personne la nuit — pipelines CI/CD et conteneurs — et un dialogue direct avec les équipes métier pour transformer un besoin flou en fonctionnalité qui tient la charge.",
-    stat1:"Projets réalisés",stat2:"Années de pratique",stat3:"Technos maîtrisées",stat4:"Curiosité",
-    work_title:"Réalisations",work_sub:"Trois missions détaillées — contexte, enjeu, ce que j'ai fait, résultat — et mon code public.",
+    stat1:"Projets réalisés",stat2:"Années d'expérience",stat3:"Technos maîtrisées",stat4:"Curiosité",
+    work_title:"Réalisations",work_sub:"Quatre missions détaillées — contexte, enjeu, ce que j'ai fait, résultat — et mon code public.",
     case_cta:"Lire l'étude de cas →",case_close:"Fermer",
-    cv_title:"Mon parcours",cv_sub:"Quatre ans sur des applications métiers critiques, du plugin Dynamics jusqu'à la mise en production.",
+    cv_title:"Mon parcours",cv_sub:"Plus de trois ans sur des applications métiers critiques, du dashboard temps réel à la mise en production.",
     cv1_when:"Depuis mars 2026",cv1_what:"Développeur .NET — Reborn",
     cv2_when:"2024 – 2026",cv2_what:"Développeur .NET, applications métiers & SI — Nexpublica",
     cv3_when:"2023 – 2024",cv3_what:"Stages .NET / Angular — INETUM, Yulcom, Exakis Nelite",
@@ -618,18 +622,18 @@ const I18N = {
     exp2_title:"Dynamics CRM & systems integration",exp2_desc:"Plugins, workflows and FetchXML queries on Dynamics. Connecting Microsoft applications to existing systems through APIs, and reshaping the processes that link them.",
     exp3_title:"Process automation",exp3_desc:"Automated data processing and exchanges for better reliability and performance, with the technical documentation that lets the team take over.",
     exp4_title:"Reliable deployments",exp4_desc:"CI/CD pipelines on GitLab and Azure DevOps, Docker containerisation: releases that are repeatable, traceable and free of surprises.",
-    hero_kicker:".NET Developer · Dynamics CRM · Systems Integration",
+    hero_kicker:".NET Full Stack Developer · Blazor · Systems Integration",
     sk_core:"Core stack",sk_data:"Data",sk_ops:"Delivery",sk_front:"Front-end",sk_learning:"Learning",
     hero_cta1:"See my work",hero_cta2:"Download my resume ↓",
     photo_hint:"Your photo here — add photo.jpg or photo.png to the folder",
     status:"Available for new projects",
     about_title:"About me",
-    about_p1:"I'm Mohamed Doumbouya, a .NET developer based in Casablanca. I maintain and evolve business-critical applications: ASP.NET Core APIs, Dynamics CRM integrations and process automation inside enterprise information systems.",
+    about_p1:"I'm Mohamed Doumbouya, a .NET full stack developer based in Casablanca. I build and modernise business-critical applications: real-time Blazor dashboards on .NET 10, ASP.NET Core APIs, Dynamics CRM and SAP integrations, and ETL pipelines inside industrial information systems.",
     about_p2:"What guides me: architectures that are still readable two years later, releases that don't wake anyone up at night — CI/CD pipelines and containers — and a direct line to business teams, turning a vague need into a feature that holds up in production.",
-    stat1:"Projects built",stat2:"Years of practice",stat3:"Technologies",stat4:"Curiosity",
-    work_title:"Work",work_sub:"Three assignments in detail — context, challenge, what I did, outcome — plus my public code.",
+    stat1:"Projects built",stat2:"Years of experience",stat3:"Technologies",stat4:"Curiosity",
+    work_title:"Work",work_sub:"Four assignments in detail — context, challenge, what I did, outcome — plus my public code.",
     case_cta:"Read the case study →",case_close:"Close",
-    cv_title:"My background",cv_sub:"Four years on business-critical applications, from Dynamics plugins through to production.",
+    cv_title:"My background",cv_sub:"Over three years on business-critical applications, from real-time dashboards through to production.",
     cv1_when:"Since March 2026",cv1_what:".NET Developer — Reborn",
     cv2_when:"2024 – 2026",cv2_what:".NET Developer, business apps & IS — Nexpublica",
     cv3_when:"2023 – 2024",cv3_what:".NET / Angular internships — INETUM, Yulcom, Exakis Nelite",
@@ -684,6 +688,25 @@ function renderJournal(l){
    une étude de cas ; si elle porte un "link", elle renvoie vers le code.
    Les contenus reprennent strictement ce que documente le CV. */
 const CASES = [
+  {
+    icon:"🏭", tags:["Blazor Server",".NET 10","MES / SAP","SQL Server","Docker"],
+    fr:{eyebrow:"Reborn · depuis mars 2026",
+        title:"Un dashboard Andon temps réel pour la production",
+        short:"Agrégation des données machines et de maintenance SAP dans un tableau de bord Blazor Server, à l'échelle des divisions et des ateliers.",
+        sections:[
+          ["Contexte","Un groupe industriel de plasturgie où l'état réel des lignes de production n'était pas visible en un coup d'œil : les données machines (MES) et les données de maintenance SAP PM vivaient dans des systèmes séparés."],
+          ["Enjeu","Donner aux équipes une vue unique et vivante de la production, tout en modernisant un socle applicatif hérité : des applications VB.NET WebForms encore en service, dont on ne pouvait casser ni les contrats de base de données ni le comportement métier."],
+          ["Ce que j'ai fait","Conception et développement du dashboard Andon en Blazor Server sur .NET 10, agrégeant les données machines et SAP PM en temps réel. En parallèle, migration des applications VB.NET WebForms vers Blazor Server, développement de services ETL synchronisant des APIs de facturation externes avec SQL Server — avec politiques de résilience, disjoncteurs et relances — et exécution planifiée sous Linux."],
+          ["Résultat","Un diagnostic d'incident SQL a supprimé des milliards de lectures logiques inutiles, en imposant des requêtes SARGables, une stratégie d'index et l'analyse des plans d'exécution. Les déploiements passent par des pipelines Azure DevOps vers des serveurs Ubuntu conteneurisés, couverts par des tests xUnit."]]},
+    en:{eyebrow:"Reborn · since March 2026",
+        title:"A real-time Andon dashboard for the shop floor",
+        short:"Aggregating live machine data and SAP maintenance data into a Blazor Server dashboard, across production divisions and workshops.",
+        sections:[
+          ["Context","A plastics manufacturing group where the real state of production lines was not visible at a glance: machine data (MES) and SAP PM maintenance data lived in separate systems."],
+          ["Challenge","Giving teams a single, live view of production while modernising a legacy base: VB.NET WebForms applications still in service, whose database contracts and business behaviour could not be broken."],
+          ["What I did","Designed and built the Andon dashboard in Blazor Server on .NET 10, aggregating machine and SAP PM data in real time. Alongside it, migrated the VB.NET WebForms applications to Blazor Server, and built .NET ETL services synchronising external billing APIs with SQL Server — with resilience policies, circuit breakers and retries — running on a schedule under Linux."],
+          ["Outcome","One SQL Server incident diagnosis removed billions of unnecessary logical reads, by enforcing SARGable queries, an index strategy and execution-plan analysis. Deployments now run through Azure DevOps pipelines onto containerised Ubuntu servers, covered by xUnit test suites."]]}
+  },
   {
     icon:"🔗", tags:["C#",".NET","Dynamics CRM","SQL Server","APIs"],
     fr:{eyebrow:"Nexpublica · 2024 – 2026",
@@ -874,12 +897,13 @@ const statObs = new IntersectionObserver(entries=>{
     if(!e.isIntersecting) return;
     statObs.unobserve(e.target);
     const target = +e.target.dataset.count;
+    const suffix = e.target.dataset.suffix || '';
     let cur = 0;
     const step = Math.max(1, Math.round(target/40));
     const iv = setInterval(()=>{
       cur += step;
       if(cur >= target){ cur = target; clearInterval(iv); }
-      e.target.textContent = cur;
+      e.target.textContent = cur + (cur === target ? suffix : '');
     }, 35);
   });
 },{threshold:.5});
