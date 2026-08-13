@@ -1,3 +1,9 @@
 # photo d'origine avec fond blanc, conservée en local uniquement
 Mohameed.png
 .DS_Store
+# variantes destinées aux candidatures, non publiées
+CV-Mohamed-Doumbouya-EN.pdf
+CV-Mohamed-Doumbouya-FR-nophoto.pdf
+cv-modele-*.html
+cv-build.py
+photo-cv.png

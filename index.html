@@ -382,7 +382,7 @@
       <div class="typed-line"><span id="typed"></span><span class="cursor"></span></div>
       <div class="cta-row">
         <a href="#work" class="btn btn-gold" data-i18n="hero_cta1">Voir mes réalisations</a>
-        <a href="CV-Mohamed-Doumbouya.pdf" class="btn btn-ghost" download data-i18n="hero_cta2">Télécharger mon CV ↓</a>
+        <a href="CV-Mohamed-Doumbouya-FR.pdf" class="btn btn-ghost cv-link" download data-i18n="hero_cta2">Télécharger mon CV ↓</a>
       </div>
     </div>
     <div class="hero-photo">
@@ -546,7 +546,7 @@
       </div>
     </div>
     <div class="cv-action">
-      <a href="CV-Mohamed-Doumbouya.pdf" class="btn btn-gold" download data-i18n="cv_btn">Télécharger mon CV (PDF)</a>
+      <a href="CV-Mohamed-Doumbouya-FR.pdf" class="btn btn-gold cv-link" download data-i18n="cv_btn">Télécharger mon CV (PDF)</a>
       <span class="cv-meta" data-i18n="cv_meta">PDF · 1 page</span>
     </div>
   </div>
@@ -863,6 +863,14 @@ function setLang(l){
   document.getElementById('btnEn').classList.toggle('active', l==='en');
   renderJournal(l);
   renderCases(l);
+  /* chaque langue son CV ; la version anglaise part sans photo, usage britannique */
+  const cv = l === 'en'
+    ? {href:'CV-Mohamed-Doumbouya-EN-nophoto.pdf', name:'CV-Mohamed-Doumbouya-EN.pdf'}
+    : {href:'CV-Mohamed-Doumbouya-FR.pdf',         name:'CV-Mohamed-Doumbouya-FR.pdf'};
+  document.querySelectorAll('.cv-link').forEach(a=>{
+    a.href = cv.href;
+    a.setAttribute('download', cv.name);
+  });
   document.getElementById('caseClose').setAttribute('aria-label', I18N[l].case_close);
   restartTyping();
 }
