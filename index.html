@@ -482,6 +482,10 @@
           <div class="chips"><span class="chip">Angular</span><span class="chip">TypeScript</span></div>
         </div>
         <div class="skill-group">
+          <span class="skill-label" data-i18n="sk_mobile">Mobile</span>
+          <div class="chips"><span class="chip">Flutter</span><span class="chip">Dart</span></div>
+        </div>
+        <div class="skill-group">
           <span class="skill-label" data-i18n="sk_learning">En cours</span>
           <div class="chips">
             <span class="chip chip-soft">C++</span><span class="chip chip-soft">Kubernetes</span>
@@ -492,7 +496,7 @@
     <div class="stats">
       <div class="stat"><b data-count="12">0</b><span data-i18n="stat1">Projets réalisés</span></div>
       <div class="stat"><b data-count="3" data-suffix="+">0</b><span data-i18n="stat2">Années d'expérience</span></div>
-      <div class="stat"><b data-count="17">0</b><span data-i18n="stat3">Technos maîtrisées</span></div>
+      <div class="stat"><b data-count="19">0</b><span data-i18n="stat3">Technos maîtrisées</span></div>
       <div class="stat"><b>∞</b><span data-i18n="stat4">Curiosité</span></div>
     </div>
   </div>
@@ -502,7 +506,7 @@
   <div class="sec-head">
     <span class="num">03</span>
     <h2 data-i18n="work_title">Réalisations</h2>
-    <p data-i18n="work_sub">Quatre missions détaillées — contexte, enjeu, ce que j'ai fait, résultat — et mon code public.</p>
+    <p data-i18n="work_sub">Six réalisations détaillées — contexte, enjeu, ce que j'ai fait, résultat — et mon code public.</p>
   </div>
   <!-- cartes générées depuis la liste CASES, en bas de page -->
   <div class="projects" id="projectList"></div>
@@ -592,7 +596,7 @@ const I18N = {
     exp3_title:"Automatisation des flux",exp3_desc:"Traitements et échanges de données automatisés pour gagner en fiabilité et en performance, avec la documentation technique qui permet à l'équipe de reprendre la main.",
     exp4_title:"Fiabilisation des déploiements",exp4_desc:"Pipelines CI/CD sur GitLab et Azure DevOps, conteneurisation Docker : des mises en production répétables, tracées et sans surprise.",
     hero_kicker:"Développeur .NET · Blazor · Intégration SI",
-    sk_core:"Cœur de métier",sk_data:"Données",sk_ops:"Livraison",sk_front:"Front",sk_learning:"En cours",
+    sk_core:"Cœur de métier",sk_data:"Données",sk_ops:"Livraison",sk_front:"Front",sk_mobile:"Mobile",sk_learning:"En cours",
     hero_cta1:"Voir mes réalisations",hero_cta2:"Télécharger mon CV ↓",
     photo_hint:"Ta photo ici — ajoute photo.jpg ou photo.png dans le dossier",
     status:"Disponible pour de nouveaux projets",
@@ -600,7 +604,7 @@ const I18N = {
     about_p1:"Je suis Mohamed Doumbouya, développeur .NET full stack à Casablanca. Je construis et modernise des applications métiers critiques : dashboards temps réel en Blazor sur .NET 10, APIs ASP.NET Core, intégrations Dynamics CRM et SAP, et pipelines ETL au sein de systèmes d'information industriels.",
     about_p2:"Ce qui me guide : des architectures qui restent lisibles dans deux ans, des mises en production qui ne réveillent personne la nuit — pipelines CI/CD et conteneurs — et un dialogue direct avec les équipes métier pour transformer un besoin flou en fonctionnalité qui tient la charge.",
     stat1:"Projets réalisés",stat2:"Années d'expérience",stat3:"Technos maîtrisées",stat4:"Curiosité",
-    work_title:"Réalisations",work_sub:"Quatre missions détaillées — contexte, enjeu, ce que j'ai fait, résultat — et mon code public.",
+    work_title:"Réalisations",work_sub:"Six réalisations détaillées — contexte, enjeu, ce que j'ai fait, résultat — et mon code public.",
     case_cta:"Lire l'étude de cas →",case_close:"Fermer",
     cv_title:"Mon parcours",cv_sub:"Plus de trois ans sur des applications métiers critiques, du dashboard temps réel à la mise en production.",
     cv1_when:"Depuis mars 2026",cv1_what:"Développeur .NET — Reborn",
@@ -623,7 +627,7 @@ const I18N = {
     exp3_title:"Process automation",exp3_desc:"Automated data processing and exchanges for better reliability and performance, with the technical documentation that lets the team take over.",
     exp4_title:"Reliable deployments",exp4_desc:"CI/CD pipelines on GitLab and Azure DevOps, Docker containerisation: releases that are repeatable, traceable and free of surprises.",
     hero_kicker:".NET Full Stack Developer · Blazor · Systems Integration",
-    sk_core:"Core stack",sk_data:"Data",sk_ops:"Delivery",sk_front:"Front-end",sk_learning:"Learning",
+    sk_core:"Core stack",sk_data:"Data",sk_ops:"Delivery",sk_front:"Front-end",sk_mobile:"Mobile",sk_learning:"Learning",
     hero_cta1:"See my work",hero_cta2:"Download my CV ↓",
     photo_hint:"Your photo here — add photo.jpg or photo.png to the folder",
     status:"Available for new projects",
@@ -631,7 +635,7 @@ const I18N = {
     about_p1:"I'm Mohamed Doumbouya, a .NET full stack developer based in Casablanca. I build and modernise business-critical applications: real-time Blazor dashboards on .NET 10, ASP.NET Core APIs, Dynamics CRM and SAP integrations, and ETL pipelines inside industrial information systems.",
     about_p2:"What guides me: architectures that are still readable two years later, releases that don't wake anyone up at night — CI/CD pipelines and containers — and a direct line to business teams, turning a vague need into a feature that holds up in production.",
     stat1:"Projects built",stat2:"Years of experience",stat3:"Technologies",stat4:"Curiosity",
-    work_title:"Work",work_sub:"Four assignments in detail — context, challenge, what I did, outcome — plus my public code.",
+    work_title:"Work",work_sub:"Six projects in detail — context, challenge, what I did, outcome — plus my public code.",
     case_cta:"Read the case study →",case_close:"Close",
     cv_title:"My background",cv_sub:"Over three years on business-critical applications, from real-time dashboards through to production.",
     cv1_when:"Since March 2026",cv1_what:".NET Developer — Reborn",
@@ -763,6 +767,47 @@ const CASES = [
           ["Challenge","Exposing business data to client applications while keeping precise control over who can reach what."],
           ["What I did","Developed the APIs, then implemented a JWT-based authentication and authorisation system with role management."],
           ["Outcome","Resource access controlled per user profile, in a setting close to real enterprise applications and information systems."]]}
+  },
+  {
+    icon:"⚽", tags:["Flutter","Dart","iOS &amp; Android","Laravel","Supabase"],
+    link:"https://apps.apple.com/fr/app/id6745738668",
+    fr:{eyebrow:"Score 224 · projet client · publié sur l'App Store",
+        title:"Une application de football livrée sur les stores",
+        short:"Championnat guinéen, classements, résultats, fiches équipes et joueurs — une app Flutter iOS et Android en production.",
+        cta:"Voir sur l'App Store →",
+        sections:[
+          ["Contexte","Une application grand public dédiée au football guinéen : championnat, classements, résultats, prochains matchs, fiches d'équipes et parcours des joueurs. Un projet client, à faire vivre version après version plutôt qu'à livrer une fois."],
+          ["Enjeu","Publier et maintenir une application sur iOS comme sur Android, avec des données venant de deux mondes : une API Laravel dédiée au championnat guinéen et des sources internationales pour le reste. Les identifiants d'une base ne valent pas pour l'autre, ce qui cassait certaines fiches d'équipe."],
+          ["Ce que j'ai fait","Développement Flutter pour les deux plateformes : annuaire des joueurs unifié par pays, fiche de carrière, fiche d'équipe rebranchée sur l'API Laravel, notifications locales, mise en cache des images et favoris persistés. J'ai sorti les clés d'API tierces du binaire et ajouté un mécanisme qui prévient l'utilisateur qu'une nouvelle version existe. Je prends aussi en charge la chaîne de publication : archive signée, envoi et soumission sur App Store Connect."],
+          ["Résultat","L'application est publiée sur l'App Store et suivie en continu — série 2.4, une quinzaine de builds livrés, chaque correctif passant par une branche de release dédiée."]]},
+    en:{eyebrow:"Score 224 · client project · live on the App Store",
+        title:"A football app shipped to the stores",
+        short:"Guinean league, standings, results, team and player profiles — a Flutter app live on iOS and Android.",
+        cta:"View on the App Store →",
+        sections:[
+          ["Context","A consumer app dedicated to Guinean football: league, standings, results, upcoming fixtures, team profiles and player careers. A client project, kept alive version after version rather than delivered once."],
+          ["Challenge","Publishing and maintaining an app on both iOS and Android, with data coming from two worlds: a dedicated Laravel API for the Guinean league and international sources for the rest. IDs from one database don't hold in the other, which was breaking some team profiles."],
+          ["What I did","Flutter development for both platforms: a unified player directory by country, career profiles, team pages rewired onto the Laravel API, local notifications, image caching and persisted favourites. I moved third-party API keys out of the binary and added an in-app notice when a new version ships. I also own the release chain: signed archive, upload and submission through App Store Connect."],
+          ["Outcome","The app is live on the App Store and actively maintained — the 2.4 series, around fifteen shipped builds, each fix going through its own release branch."]]}
+  },
+  {
+    icon:"🔖", tags:["Flutter","QR / mobile_scanner","SQLite","Laravel","PDF"],
+    fr:{eyebrow:"Pointage FADEF · projet client",
+        title:"Pointage par QR code sur terminaux POS, même hors ligne",
+        short:"Application Flutter de pointage par badge, conçue pour des terminaux Android d'atelier sans réseau fiable.",
+        sections:[
+          ["Contexte","Une exploitation agricole devait pointer ses employés — serres, plantation, direction — depuis des terminaux POS Android d'ancienne génération, sur des sites où la connexion n'est pas garantie."],
+          ["Enjeu","Un pointage ne peut pas échouer parce que le réseau tombe. Il fallait aussi composer avec le matériel réel : Android 7 à 11 et des caméras médiocres, qui rendent la lecture de QR capricieuse."],
+          ["Ce que j'ai fait","Application Flutter lisant les badges via mobile_scanner, torche comprise pour les caméras faibles. Le QR encode « Nom#Département#Matricule » en Base64, décodé entièrement sur l'appareil : aucun appel serveur n'est nécessaire pour identifier un employé. Les scans d'arrivée et de départ sont distincts, limités à un par badge et par jour, tamponnés en SQLite puis synchronisés vers un back-end Laravel au retour du réseau. Export d'une fiche de pointage PDF par département et par jour, écrite directement dans le gestionnaire de fichiers Android."],
+          ["Résultat","Le pointage fonctionne de bout en bout sans connexion, historique et export compris. Un mode simulé permet de dérouler tout le parcours avant même que le back-end soit disponible."]]},
+    en:{eyebrow:"Pointage FADEF · client project",
+        title:"QR badge attendance on POS terminals, offline included",
+        short:"A Flutter attendance app built for ageing Android POS terminals on sites without reliable network.",
+        sections:[
+          ["Context","A farming operation needed to clock in employees — greenhouses, plantation, management — from ageing Android POS terminals, on sites where connectivity is not guaranteed."],
+          ["Challenge","Clocking in cannot fail because the network drops. The real hardware had to be accounted for too: Android 7 to 11 and poor cameras, which make QR reading unreliable."],
+          ["What I did","A Flutter app reading badges through mobile_scanner, torch included for weak cameras. The QR encodes “Name#Department#ID” in Base64, decoded entirely on the device: no server call is needed to identify an employee. Arrival and departure scans are separate, capped at one per badge per day, buffered in SQLite and synchronised to a Laravel backend once the network returns. Attendance sheets are exported as one PDF per department per day, written straight into the Android file manager."],
+          ["Outcome","Attendance works end to end with no connection, history and export included. A mock mode runs the whole journey before the backend is even available."]]}
   },
   {
     icon:"🔷", tags:["C#","Blazor",".NET"], link:"https://github.com/medoum/blazorProject",
