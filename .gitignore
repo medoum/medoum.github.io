@@ -7,3 +7,5 @@ CV-Mohamed-Doumbouya-FR-nophoto.pdf
 cv-modele-*.html
 cv-build.py
 photo-cv.png
+# configuration locale de Claude Code
+.claude/
